@@ -1,6 +1,6 @@
 package gazi.university;
 
-public class Enemy implements ActiveAndPassive{
+public abstract class Enemy implements ActiveAndPassive{
 
     private String name;
     private int health;
@@ -12,12 +12,8 @@ public class Enemy implements ActiveAndPassive{
         this.level = level;
     }
 
-    public int goldAward(){
-        return 0;
-    }
-    public int xpAward(){
-        return 0;
-    }
+    public abstract int goldAward();
+    public abstract int xpAward();
 
     public String getName() {
         return name;
@@ -43,19 +39,6 @@ public class Enemy implements ActiveAndPassive{
         this.level = level;
     }
 
-    @Override
-    public int defaultAttack(Object obj) {
-        return 0;
-    }
-
-    @Override
-    public int activeSkill(Object obj) {
-        return 0;
-    }
-
-    @Override
-    public int passiveSkill() {
-        return 0;
-    }
+ 
 
 }
