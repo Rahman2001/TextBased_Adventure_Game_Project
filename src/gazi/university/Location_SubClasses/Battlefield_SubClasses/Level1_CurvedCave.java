@@ -13,6 +13,13 @@ import java.util.Random;
 
 public class Level1_CurvedCave extends Battlefield {
     private List<Enemy> listOfEnemies = new ArrayList<>();
+    private static final int numberOfEnemies = 15;
+    private int remainedNumber = numberOfEnemies;
+    private static final int totalGoldAward = numberOfEnemies * 10;
+    private int remainedGold = totalGoldAward;
+    private static final int totalXpAward = numberOfEnemies * 5;
+    private int remainedXpAward = totalXpAward;
+    private List<Integer> GoldXpPerEnemy = new ArrayList<>();
 
     public Level1_CurvedCave(Enemy enemy, Character character){
         super(enemy, character);
@@ -23,14 +30,18 @@ public class Level1_CurvedCave extends Battlefield {
     @Override
     protected void spawnEnemy(Enemy enemy) { // this method generates list of Enemies in random order respective to the level fo battlefield
         int times = 0;
-        String[] typeName = {"Poacher", "Vampire", "Zombie"};
+        String[] typeName = {"Poacher", "Vampire", "Zombie"};//Thinking about how to randomly pick up the level of enemy
 
-        while(times != this.getNumberOfEnemies()){
+        while(times != this.remainedNumber){
             Random random = new Random();
             int randomNumber = random.nextInt(typeName.length);
             switch (typeName[randomNumber]) { // this is called "Enhanced switch statement", guys. :)
                 case "Poacher" -> {
                     Poacher poacher = new Poacher("Poacher1", 10, 1);
+
+                    // We should talk about each enemy's price when it is killed (how much gold and xp does it worth?)
+                    //After that, assign those values to each of them in their respective classes to be able to add them character's variables.
+
                     this.listOfEnemies.add(poacher);
                 }
                 case "Vampire" -> {
@@ -47,57 +58,46 @@ public class Level1_CurvedCave extends Battlefield {
     }
 
     @Override
-    public Enemy getEnemy() {
-        return null;
+    public List<Enemy> getListOfEnemy() {
+        return this.listOfEnemies;
     }
 
     @Override
-    public void setEnemy(Enemy enemy) {
+    public void killedEnemy(Character character, Enemy killedEnemy) {
+        this.remainedNumber = numberOfEnemies - 1;
 
-    }
-
-    @Override
-    public void killedEnemy(Enemy killedEnemy) {
-
-    }
-
-    @Override
-    public int getNumberOfEnemies() {
-        return 0;
-    }
-
-    @Override
-    public void setNumberOfEnemies(int numberOfEnemies) {
-
+        this.listOfEnemies.remove(numberOfEnemies - remainedNumber);
     }
 
     @Override
     public int getRemainedEnemies() {
-        return 0;
+        return this.remainedNumber;
     }
 
     @Override
-    public void setRemainedEnemies(int remainedEnemies) {
-
-    }
-
-    @Override
-    public int getTotalGoldAward() {
-        return 0;
-    }
-
-    @Override
-    public void setTotalGoldAward(int totalGoldAward) {
+    protected void setRemainedEnemies(int remainedEnemies) {//Thinking about using this method in database management since
+                                                            // in the flow of game this method should be secured from player.
+        this.remainedNumber = remainedEnemies;
 
     }
 
     @Override
-    public int getTotalExperience() {
-        return 0;
+    protected int getRemainedGold() {
+        return this.remainedGold;
     }
 
     @Override
-    public void setTotalExperience(int totalExperience) {
+    protected void setRemainedGold(int totalGoldAward) {
+        this.remainedGold = remainedGold;
+    }
 
+    @Override
+    protected int getRemainedExperience() {
+        return this.remainedXpAward;
+    }
+
+    @Override
+    protected void setRemainedExperience(int totalExperience) {
+        this.remainedXpAward = remainedXpAward;
     }
 }

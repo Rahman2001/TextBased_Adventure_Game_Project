@@ -1,6 +1,11 @@
 package gazi.university;
 
+import gazi.university.Equipment_SubClasses.Armor;
+import gazi.university.Equipment_SubClasses.Potions;
+import gazi.university.Equipment_SubClasses.Weapon;
+
 public class Character implements ActiveAndPassive, Info{
+
     private String name;
     private int health;
     private int mana;
@@ -42,7 +47,7 @@ public class Character implements ActiveAndPassive, Info{
 
     // Getters and setters for my additional variables.
     public int getIntelligence() {
-        return intelligence;
+        return this.intelligence;
     }
 
     public void setIntelligence(int intelligence) {
@@ -50,7 +55,7 @@ public class Character implements ActiveAndPassive, Info{
     }
 
     public int getLvl() {
-        return lvl;
+        return this.lvl;
     }
 
     public void setLvl(int lvl) {
@@ -58,7 +63,7 @@ public class Character implements ActiveAndPassive, Info{
     }
 
     public int getExperience() {
-        return experience;
+        return this.experience;
     }
 
     public void setExperience(int experience) {
@@ -66,20 +71,27 @@ public class Character implements ActiveAndPassive, Info{
     }
 
     public int getDexterity() {
-        return dexterity;
+        return this.dexterity;
     }
 
     public void setDexterity(int dexterity) {
         this.dexterity = dexterity;
     }
 
-    public Character(String name, int health, int mana, int strength, int money, Equipment equipment){
+    public Character(String name, int health, int mana, int strength, int dexterity, int intelligence,
+                     int money, Equipment equipment){
         this.name = name;
         this.health = health;
         this.mana = mana;
         this.strength = strength;
+        this.dexterity = dexterity;
+        this.intelligence = intelligence;
         this.money = money;
         this.equipment = equipment;
+    }
+    // Adding another constructor for flexibility. And I needed it.
+    public Character(){
+
     }
     public void levelUp(){
         // Let's make this changes in another method and call them.
@@ -123,9 +135,42 @@ public class Character implements ActiveAndPassive, Info{
     public void buyItem(Equipment item){
         //Please, modify your code here. Note that an Equipment cannot be more than one
         // because it serves as a container of Weapon, Armor, Potions which have lists of their subclasses
+
+        // Ok. As I know we can use instanceof here.
+        // Waiting for other classes' update.
+        if(item instanceof Weapon) {
+            equipment.setWeaponToList(item);
+            // ((Weapon) item) code generated automatically.
+            setMoney(getMoney() - ((Weapon) item).getPrice());
+        }
+        else if(item instanceof Armor){
+            equipment.setArmorToList(item);
+            setMoney(getMoney() - );
+
+        }
+        else if(item instanceof Potions){
+            equipment.setPotionsToList(item);
+            setMoney(getMoney() - item.);
+        }
+
+
+
+
+
+//        else if(item instanceof Potions)
+//            equipment.setPotionsToList(item);
     }
 
     public void sellItem(Equipment item){
+        if(item instanceof Weapon) {
+            equipment.(item);
+        }
+        else if(item instanceof Armor){
+            equipment.setArmorToList(item);
+        }
+        else if(item instanceof Potions){
+            equipment.setPotionsToList(item);
+        }
         //inventory.getEquipmentList().remove(item);
     }
 
@@ -171,19 +216,17 @@ public class Character implements ActiveAndPassive, Info{
         this.equipment = equipment;
     }
 
+    @Override
+    public void defaultAttack(Enemy enemy) {
+
+    }
+
+    @Override
+    public void activeSkill(Enemy enemy) {
+
+    }
+
     // Implementing and overriding methods from interfaces.
-    @Override
-    public int defaultAttack(Object obj) {
-        return 0;
-    }
 
-    @Override
-    public int activeSkill(Object obj) {
-        return 0;
-    }
 
-    @Override
-    public int passiveSkill() {
-        return 0;
-    }
 }

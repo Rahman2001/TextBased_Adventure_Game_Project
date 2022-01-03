@@ -1,5 +1,6 @@
 package gazi.university.Enemy_SubClasses;
 
+import gazi.university.Character;
 import gazi.university.Enemy;
 
 public class Poacher extends Enemy {
@@ -18,11 +19,6 @@ public class Poacher extends Enemy {
 	}
 
 	@Override
-	public int passiveSkill() {
-		return 0;
-	}
-
-	@Override
 	public int goldAward() {
 		return 0;
 	}
@@ -33,6 +29,14 @@ public class Poacher extends Enemy {
 	}
 
 
+}
+//=======
 
+    // Planning to make more changes here.
+
+    public void defaultAttack(Character character) {
+        character.setHealth(character.getHealth() - getDamage());
+    }
 
 }
+

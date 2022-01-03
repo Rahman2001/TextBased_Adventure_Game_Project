@@ -1,25 +1,25 @@
 package gazi.university.Character_SubClasses;
 
 import gazi.university.Character;
+import gazi.university.Enemy;
 import gazi.university.Equipment;
 
 public class Ranger extends Character {
-    public Ranger(String name, int health, int mana, int strength, int money, Equipment equipment){
-        super(name, health, mana, strength, money, equipment);
+    public Ranger(String name, int health, int mana, int str, int dex, int intel, int money, Equipment equipment){
+        super(name, health, mana, str, dex, intel, money, equipment);
+    }
+    @Override
+    public void defaultAttack(Enemy enemy) {
+        enemy.setHealth(enemy.getHealth() - getDamage());
     }
 
     @Override
-    public int defaultAttack(Object obj) {
-        return 0;
+    public void activeSkill(Enemy enemy) {
+        // Ranger's active skills damages opponnent normal attack and then heals same amount dealt damage.
+        enemy.setHealth(enemy.getHealth() - getDamage());
+        setHealth(getHealth() + getDamage());
+        setMana(getMana() - 10);
+
     }
 
-    @Override
-    public int activeSkill(Object obj) {
-        return 0;
-    }
-
-    @Override
-    public int passiveSkill() {
-        return super.passiveSkill();
-    }
 }

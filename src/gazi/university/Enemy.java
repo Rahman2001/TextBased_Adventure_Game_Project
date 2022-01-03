@@ -6,6 +6,18 @@ public abstract class Enemy implements ActiveAndPassive{
     private int health;
     private int level;
 
+    // Added damage part.
+    private int damage;
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+
+
     public Enemy(String name, int health, int level){
         this.name = name;
         this.health = health;
@@ -39,6 +51,15 @@ public abstract class Enemy implements ActiveAndPassive{
         this.level = level;
     }
 
- 
+//=======
+    @Override
+    public void defaultAttack(Enemy enemy) {
+
+    }
+
+    @Override
+    public void activeSkill(Enemy enemy) {
+
+    }
 
 }
